@@ -55,6 +55,25 @@ func TestModifyTenantIDRecursively(t *testing.T) {
 		tenantID string
 		want     any
 	}{
+		// これはポインタ型ではないため、変更が反映されない
+		{
+			name: "SimpleStruct",
+			input: SimpleStruct{
+				ID:       "id-1",
+				Name:     "test-name",
+				TenantID: "old-tenant",
+				Count:    10,
+				Active:   true,
+			},
+			tenantID: "new-tenant",
+			want: SimpleStruct{
+				ID:       "id-1",
+				Name:     "test-name",
+				TenantID: "old-tenant",
+				Count:    10,
+				Active:   true,
+			},
+		},
 		{
 			name: "SimpleStructWithPointer",
 			input: &SimpleStruct{
